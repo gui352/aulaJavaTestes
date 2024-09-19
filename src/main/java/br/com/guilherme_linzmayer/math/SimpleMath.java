@@ -1,4 +1,4 @@
-package br.com.osterloh.math;
+package br.com.guilherme_linzmayer.math;
 
 public class SimpleMath {
 

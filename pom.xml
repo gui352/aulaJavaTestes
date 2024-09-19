@@ -14,7 +14,7 @@
 	<name>teste</name>
 	<description>Projeto para Prática de Testes</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

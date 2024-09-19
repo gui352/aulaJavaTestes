@@ -1,6 +1,6 @@
-package br.com.osterloh;
+package br.com.guilherme_linzmayer;
 
-import br.com.osterloh.math.SimpleMath;
+import br.com.guilherme_linzmayer.math.SimpleMath;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
