@@ -2,10 +2,16 @@ package br.com.guilherme_linzmayer.model;
 
 public class Pessoa {
 
+    private Long Id;
     private String nome;
     private String sobrenome;
     private String email;
-    private int idade;
+    private String endereco;
+    private String genero;
+
+    public Long getId() { return Id; }
+
+    public void setId(Long id) { Id = id; }
 
     public String getNome() {
         return nome;
@@ -31,18 +37,28 @@ public class Pessoa {
         this.email = email;
     }
 
-    public int getIdade() {
-        return idade;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public Pessoa(String nome, String sobrenome, String email, int idade) {
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public Pessoa(Long Id, String nome, String sobrenome, String email, String endereco, String genero) {
+        this.Id = Id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
-        this.idade = idade;
+        this.endereco = endereco;
+        this.genero = genero;
     }
 }

@@ -13,11 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PessoaServiceTest {
 
     Pessoa pessoa;
+    private PessoaService service;
+    private List<Pessoa> pessoas;
 
     @BeforeEach
-    void setup(){
-        pessoa = new Pessoa("John", "Doe", "john@email.com", 25);
-    }
+    service = new PessoaService();
+    pessoa = new Pessoa(1, "John", "Doe", "john.doe@email.com", "Santa Catarina - SC", "M");
+    pessoas = new ArrayList<>();
+    pessoas.add(new Pessoa(2, "John0", "Doe", "john0.doe@email.com", "Santa Catarina - SC", "M"));
+    pessoas.add(new Pessoa(3, "John1", "Doe", "john1.doe@email.com", "Santa Catarina - SC", "M"));
+    pessoas.add(new Pessoa(4, "John2", "Doe", "john2.doe@email.com", "Santa Catarina - SC", "M"));
 
     @DisplayName("Teste cria pessoa")
     @Test
@@ -71,5 +76,45 @@ public class PessoaServiceTest {
         atual.setIdade(0);
 
         assertEquals(pessoa.getIdade(),atual.getIdade(),  () -> "Idade da pessoa é diferente!");
+    }
+
+    @DisplayName("Teste de busca de todas as pessoas")
+    @Test
+    void testeBuscarTodasPessoas() {
+        List<Pessoa> result = service.buscarTodasPessoas();
+        assertEquals(3, result.size());
+    }
+
+    @DisplayName("Teste de busca de todas as pessoas - Lista nula retorna RuntimeException")
+    @Test
+    void testeBuscarTodasPessoasQuandoListaENula() {
+        service.definirPessoas(null);
+        RuntimeException exception = assertThrows(RuntimeException.class, service::buscarTodasPessoas);
+        assertEquals("Lista de pessaos é nula", exception.getMessage());
+    }
+
+    @DisplayName("Teste busca pessoa por ID")
+    @Test
+    void testeBuscarPessoaPeloIDSucesso() {
+        Pessoa result = service.buscarPessoaPeloId(2); // Busca uma pessoa pelo ID
+        assertNotNull(result);
+        assertEquals("Nome Pessoa:", result.getFirstName());
+    }
+
+    @DisplayName("Teste busca pessoa por ID -  Retornar IllegalArgumentException")
+    @Test
+    void testeBuscarPessoaPeloIdInvalido() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            service.buscarPessoaPeloId(10);
+        });
+        assertEquals("Pessoa não encontrada com ID: 10", exception.getMessage());
+    }
+
+    @DisplayName("Teste exclui pessoa")
+    @Test
+    void testeRemoverPessoaPeloIdSucesso() {
+        service.removerPessoaPeloId(2); // Remove uma pessoa pelo ID
+        List<Pessoa> result = service.buscarTodasPessoas();
+        assertEquals(2, result.size());
     }
 }
